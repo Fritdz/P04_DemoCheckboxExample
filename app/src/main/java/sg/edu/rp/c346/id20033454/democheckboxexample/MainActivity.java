@@ -29,14 +29,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i("MyActivity", "Inside onClick()");
-                String output = "The discount is ";
-                if(cbEnabled.isChecked()){
-                    tvShow.setText(output + "given");
-                } else {
-                    tvShow.setText(output + "not given");
+                if(cbEnabled.isChecked()) {
+                    double pay = calcPay(100, 20);
+                    tvShow.setText("The discount is given. You need to pay " + pay);
                 }
+                else {
+                    double pay = calcPay(100, 0);
+                    tvShow.setText("The discount is not given. You need to pay " + pay);
+                }
+
                 Toast.makeText(MainActivity.this, "Button Click", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private double calcPay(double price, double discount){
+        double pay = price * (1 - discount/100);
+        return pay;
     }
 }
